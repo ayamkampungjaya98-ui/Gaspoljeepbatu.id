@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gaspoljeepbatu.netlify.app/sitemap.xml

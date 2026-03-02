@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Gaspoljeepbatu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #FF5722;
+            --primary-dark: #E64A19;
+            --dark: #121212;
+            --light: #F8F9FA;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            padding-top: 80px;
+            /* Offset for fixed navbar on non-hero pages */
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .brand-font {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            color: var(--primary) !important;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        /* Buttons */
+        .btn-custom {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+        }
+
+        .btn-custom:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-logo {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Floating Button */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .float-wa:hover {
+            background-color: #128C7E;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Media Queries for Navbar */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background-color: rgba(18, 18, 18, 0.95);
+                border-radius: 10px;
+                padding: 15px;
+                margin-top: 10px;
+            }
+        }
+
+        /* Blog Specific Styles */
+        .blog-header {
+            padding-top: 60px;
+        }
+
+        .blog-card {
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .blog-img-container img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .page-link-custom {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50% !important;
+            margin: 0 5px;
+            color: var(--dark);
+            background-color: #e9ecef;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .page-link-custom:hover {
+            background-color: #d6d8db;
+            color: var(--dark);
+        }
+
+        .page-item.active .page-link-custom {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            padding-left: 50px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 50px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+            z-index: 10;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            padding: 0 25px;
+            z-index: 10;
+            box-shadow: none;
+        }
+
+        .search-btn:hover {
+            box-shadow: none;
+            transform: none;
+        }
+
+        .hover-primary:hover {
+            color: var(--primary) !important;
+        }
+
+        .focus-ring-none:focus {
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GASPOLJEEPBATU</a>
+            <!-- HAMBURGER MENU ONLY ON MOBILE -->
+            <button class="navbar-toggler border-0 shadow-none focus-ring-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars fa-lg text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0 text-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html#hero">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#packages">Paket</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#gallery">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header Section -->
+    <section class="blog-header pb-5">
+        <div class="container text-center pt-4">
+            <h1 class="brand-font mb-3">Blog Gaspoljeepbatu</h1>
+            <p class="text-muted mx-auto mb-4" style="max-width: 800px; font-size: 1.1rem;">
+                Dapatkan tips seru, panduan lokasi, dan inspirasi petualangan menantang dengan jeep 4x4 untuk family
+                gathering maupun acara perusahaan di Kota Batu.
+            </p>
+
+            <div class="search-container mt-4 mb-3">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="form-control form-control-lg search-input py-3"
+                    placeholder="Cari artikel, tips, promo...">
+                <button class="btn btn-custom search-btn rounded-pill" type="button">Cari</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid Content -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="row g-4">
+
+                <!-- Blog Item 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card blog-card h-100 border-0 shadow-sm bg-white">
+                        <div class="blog-img-container">
+                            <img src="img offroad/Slide26.webp" class="card-img-top" alt="Paket Fun Offroad"
+                                style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title fw-bold mb-3 brand-font" style="font-size: 1.25rem;">5 Modifikasi Wajib Mobil Offroad Sebelum Terjun ke Lumpur dan Bebatuan</h4>
+                            <p class="card-text text-muted mb-4 flex-grow-1"
+                                style="font-size: 0.95rem; line-height: 1.6;">
+                                Nikmati adrenalin di tengah alam Batu Malang yang asri dengan paket offroad terbaik.
+                                Temukan keseruan berkumpul bersama sahabat.
+                            </p>
+                            <a href="modifikasi-wajib-mobil-offroad.html" class="text-primary fw-bold text-decoration-none mt-auto"
+                                style="font-size: 0.95rem;">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Item 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card blog-card h-100 border-0 shadow-sm bg-white">
+                        <div class="blog-img-container">
+                            <img src="img offroad/Slide27.webp" class="card-img-top"
+                                alt="Pengalaman Seru Liburan Keluarga" style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title fw-bold mb-3 brand-font" style="font-size: 1.25rem;">Wajib Ada di Bagasi! 7 Alat Recovery Offroad yang Akan Menyelamatkan Anda di Tengah Hutan</h4>
+                            <p class="card-text text-muted mb-4 flex-grow-1"
+                                style="font-size: 0.95rem; line-height: 1.6;">
+                                Tips bagi kamu yang baru pertama kali mencoba rute 4x4. Pastikan rute offroad tetap
+                                menyenangkan tanpa perlu takut.
+                            </p>
+                            <a href="7-alat-recovery-offroad-wajib-di-bagasi.html" class="text-primary fw-bold text-decoration-none mt-auto"
+                                style="font-size: 0.95rem;">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Item 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card blog-card h-100 border-0 shadow-sm bg-white">
+                        <div class="blog-img-container">
+                            <img src="img offroad/Slide28.webp" class="card-img-top"
+                                alt="Tips Persiapan Wajib Sebelum Memesan" style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title fw-bold mb-3 brand-font" style="font-size: 1.25rem;">Cara Mendeteksi Kerusakan Kaki-Kaki Mobil 4x4 Setelah Digunakan di Medan Ekstrem</h4>
+                            <p class="card-text text-muted mb-4 flex-grow-1"
+                                style="font-size: 0.95rem; line-height: 1.6;">
+                                Mau offroad tapi belum pernah sama sekali? Simak ulasan jalur favorit dengan tantangan
+                                aman yang cocok dilalui bersama komunitas.
+                            </p>
+                            <a href="deteksi-kerusakan-kaki-kaki-mobil-4x4-offroad.html" class="text-primary fw-bold text-decoration-none mt-auto"
+                                style="font-size: 0.95rem;">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Item 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card blog-card h-100 border-0 shadow-sm bg-white">
+                        <div class="blog-img-container">
+                            <img src="img offroad/Slide29.webp" class="card-img-top"
+                                alt="Tips Persiapan Wajib Sebelum Mencoba" style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title fw-bold mb-3 brand-font" style="font-size: 1.25rem;">Offroad Aman dan Bertanggung Jawab: Panduan Etika 'Tread Lightly' untuk Menjaga Kelestarian Alam</h4>
+                            <p class="card-text text-muted mb-4 flex-grow-1"
+                                style="font-size: 0.95rem; line-height: 1.6;">
+                                Bawa selalu jas hujan, pakaian basah, dan peralatan lainnya agar petualangan trabas
+                                hutan tidak berantakan di tengah jalan.
+                            </p>
+                            <a href="etika-offroad-tread-lightly-kelestarian-alam.html" class="text-primary fw-bold text-decoration-none mt-auto"
+                                style="font-size: 0.95rem;">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Item 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card blog-card h-100 border-0 shadow-sm bg-white">
+                        <div class="blog-img-container">
+                            <img src="img offroad/Slide30.webp" class="card-img-top"
+                                alt="Alasan Paket Fun Offroad Cocok untuk Pemula"
+                                style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title fw-bold mb-3 brand-font" style="font-size: 1.25rem;">MT vs AT: Mana Jenis Ban yang Paling Cocok untuk Karakter Mobil Offroad Anda?</h4>
+                            <p class="card-text text-muted mb-4 flex-grow-1"
+                                style="font-size: 0.95rem; line-height: 1.6;">
+                                Berapa total anggaran yang dibutuhkan untuk sewa satu jeep di jalur Coban Talun? Cek
+                                ulasan harga terbarunya.
+                            </p>
+                            <a href="mt-vs-at-pilihan-ban-mobil-offroad.html" class="text-primary fw-bold text-decoration-none mt-auto"
+                                style="font-size: 0.95rem;">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Item 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card blog-card h-100 border-0 shadow-sm bg-white">
+                        <div class="blog-img-container">
+                            <img src="img offroad/Slide58.webp" class="card-img-top" alt="Kegiatan LDKS Sekolah di Batu"
+                                style="height: 220px; object-fit: cover;">
+                        </div>
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title fw-bold mb-3 brand-font" style="font-size: 1.25rem;">Kegiatan LDKS
+                                Sekolah di Batu: Solusi Tepat Asah Kepemimpinan</h4>
+                            <p class="card-text text-muted mb-4 flex-grow-1"
+                                style="font-size: 0.95rem; line-height: 1.6;">
+                                Aktivitas semi kemiliteran dan pembentukan karakter kepemimpinan secara outdoor untuk
+                                siswa dan organisasi sekolah.
+                            </p>
+                            <a href="#" class="text-primary fw-bold text-decoration-none mt-auto"
+                                style="font-size: 0.95rem;">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-5 pt-3 mb-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link page-link-custom" href="#" tabindex="-1"><i
+                                class="fas fa-chevron-left fa-sm"></i></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link page-link-custom" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link page-link-custom" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link page-link-custom" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link page-link-custom" href="#"><i class="fas fa-chevron-right fa-sm"></i></a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0 text-center text-lg-start">
+                    <div class="footer-logo">GASPOLJEEPBATU</div>
+                    <p class="text-white-50">Menyajikan pengalaman offroad yang aman, nyaman, dan tak terlupakan dengan
+                        pemandangan alam Kota Batu yang memukau.</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-center text-lg-start">
+                    <h5 class="text-white mb-4">Kontak Info</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> Kota Batu, Jawa Timur</li>
+                        <li class="mb-3"><a href="tel:+6282211221909"
+                                class="text-light text-decoration-none hover-primary"><i
+                                    class="fas fa-phone-alt me-2"></i> 0822-1122-1909</a></li>
+                        <li class="mb-3"><a href="https://wa.me/6282211221909"
+                                class="text-light text-decoration-none hover-primary"><i
+                                    class="fab fa-whatsapp me-2"></i> 0822-1122-1909</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center text-lg-start">
+                    <h5 class="text-white mb-4">Ikuti Kami</h5>
+                    <div class="social-links justify-content-center justify-content-lg-start d-flex">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 Gaspoljeepbatu. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/6282211221909" target="_blank" class="float-wa" aria-label="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Close navbar on click when in mobile view
+        document.querySelectorAll('.nav-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var navbarCollapse = document.getElementById('navbarResponsive');
+                if (navbarCollapse.classList.contains('show')) {
+                    var bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                    bsCollapse.hide();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
